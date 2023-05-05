@@ -31,7 +31,7 @@ export const updateUserByIdHandler = async (req: Request, res: Response) => {
 export const deleteUserByIdHandler = async (req: Request, res: Response) => {
   const { userId } = req.params;
   const user = await UserModel.findOne({ _id: userId });
-  if (user.role === "admin") {
+  if (user.role === "admin" && userId === req.user?.id) {
     throw new HttpError("Admin cannot be deleted", 400);
   }
   await UserModel.deleteOne({ _id: userId });

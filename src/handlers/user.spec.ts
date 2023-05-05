@@ -136,12 +136,18 @@ describe("User API Endpoints", () => {
           .expect(404);
       });
 
-      it("should respond 400 if you try to delete admin", async () => {
-        //TODO: fix this test
+      it("should respond 200 if admin try to delete another admin", async () => {
+        const newAdmin=await createMockAdminUser();
         const response = await request(app)
-          .delete(`/admin/users/${userAdminData.id}`)
+          .delete(`/admin/users/${newAdmin.id}`)
           .set("Authorization", `Bearer ${adminToken}`)
-          .expect(400);
+          .expect(200);
+      });
+      it("should respond 400 if admin try to delete self", async () => {
+        const response = await request(app)
+            .delete(`/admin/users/${userAdminData.id}`)
+            .set("Authorization", `Bearer ${adminToken}`)
+            .expect(400);
         expect(response.body.message).toBe("Admin cannot be deleted");
       });
       it("should respond 200 and delete the user", async () => {
