@@ -12,7 +12,6 @@ import {
 import { UserModel } from "../models/user";
 import { Application } from "express";
 import mongoose from "mongoose";
-import {createMockUser} from "../utils/mocks";
 import {faker} from "@faker-js/faker";
 
 describe("POST /signup", () => {

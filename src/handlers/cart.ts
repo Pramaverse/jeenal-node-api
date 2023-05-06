@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { CartModel } from "../models/cart";
-import { HttpError } from "../errors/error";
 import { ProductModel } from "../models/product";
 export const getProductsInCartHandler = async (req: Request, res: Response) => {
   const userId = req.user?.id as string;
@@ -11,7 +10,7 @@ export const addProductToCart = async (req: Request, res: Response) => {
   const userId = req.user?.id as string;
   const { productId } = req.params;
   const { quantity } = req.body;
-  const product = await ProductModel.findById(productId);
+  await ProductModel.findById(productId);
 
   await CartModel.findOneAndUpdate(
     { userId, productId },

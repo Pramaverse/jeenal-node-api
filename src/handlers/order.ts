@@ -35,7 +35,7 @@ export async function getOrdersOfUserHandler(req: Request, res: Response) {
 export async function changeOrderStatusHandler(req: Request, res: Response) {
   const orderId = req.params.orderId;
   const status = req.body.status;
-  const orderObj = await OrderModel.findOne({ _id: orderId });
+await OrderModel.findOne({ _id: orderId });
 
   await OrderModel.updateOne(
     { _id: orderId },
