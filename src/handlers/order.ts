@@ -36,9 +36,7 @@ export async function changeOrderStatusHandler(req: Request, res: Response) {
   const orderId = req.params.orderId;
   const status = req.body.status;
   const orderObj = await OrderModel.findOne({ _id: orderId });
-  if (!orderObj) {
-    throw new HttpError("Order not found", 400);
-  }
+
   await OrderModel.updateOne(
     { _id: orderId },
     { $set: { state: status } },

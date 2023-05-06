@@ -12,6 +12,8 @@ import {
 import { UserModel } from "../models/user";
 import { Application } from "express";
 import mongoose from "mongoose";
+import {createMockUser} from "../utils/mocks";
+import {faker} from "@faker-js/faker";
 
 describe("POST /signup", () => {
   let app: Application;
@@ -23,9 +25,9 @@ describe("POST /signup", () => {
 
   beforeEach(async () => {
     userData = {
-      name: "Test User234",
-      email: "testuser234@example.com",
-      password: "test234password",
+        name: faker.name.fullName(),
+        email: faker.internet.email(),
+        password: faker.internet.password(),
     };
   });
 

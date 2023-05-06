@@ -12,9 +12,7 @@ export const addProductToCart = async (req: Request, res: Response) => {
   const { productId } = req.params;
   const { quantity } = req.body;
   const product = await ProductModel.findById(productId);
-  if (!product) {
-    throw new HttpError("Product not found", 404);
-  }
+
   await CartModel.findOneAndUpdate(
     { userId, productId },
     { $inc: { quantity } },
